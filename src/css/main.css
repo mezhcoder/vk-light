@@ -1,0 +1,22 @@
+.wrapper-cards {
+	display: flex;
+	margin: 0 auto;
+}
+
+.card {
+	border: 1px solid black;
+	background-color: gray;
+	height: 110px;
+	width: 110px;
+	margin-left: 3px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.active {
+	background-color: white;
+}
+
+.yellow {
+	background-color: yellow;
+}
