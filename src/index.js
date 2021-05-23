@@ -26,12 +26,19 @@ const element = React.createElement(
   'Привет, мир!'
 );
 
-const Example = () => {
-  const { viewWidth } = useAdaptivity();
 
-  let index = 0;
+ let index = 0;
 
-  function check(number_index) {
+  function check() {
+    if (index > 0) {
+       let n = index - 1;
+       let pred_elements = document.getElementsByName(n.toString());
+       if (pred_elements.length > 0) {
+         pred_elements[0].classList.toggle('green');
+       }
+    }
+
+
     let elements = document.getElementsByName(index.toString());
     if (elements.length > 0) {
       if (elements[0].classList.contains('active')) {
@@ -39,6 +46,7 @@ const Example = () => {
       } else {
         bridge.send("VKWebAppFlashSetLevel", {"level": 0});
       }
+      elements[0].classList.toggle('green');
     }
     index += 1;
   }
@@ -46,15 +54,22 @@ const Example = () => {
   function timer() {
     if (index == 8) {
       index = 0;
+      document.getElementsByName("7")[0].classList.toggle('green');
     }
 
     setTimeout(() => {
         timer();
         check();
     }, 1000);
+
+
   }
 
   timer();
+
+const Example = () => {
+  const { viewWidth } = useAdaptivity();
+
 
   function handleClick(e) {
     e.preventDefault();
@@ -68,7 +83,7 @@ const Example = () => {
           <View activePanel="main">
             <Panel id="main">
               <PanelHeader>VKUI</PanelHeader>
-              <Group header={<Header mode="secondary">Items</Header>}>
+              <Group header={<Header mode="secondary">Buttons</Header>}>
                   <div class="wrapper-cards"> 
                       <div name="0" class="card" onClick={handleClick}></div>
                       <div name="1" class="card" onClick={handleClick}></div>
